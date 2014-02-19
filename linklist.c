@@ -6,12 +6,17 @@
 
 #include<stdio.h>
 #include<stdlib.h>
+#include "structlinklist.h"
 
-struct ll
-{	
-	int i;
-	struct ll *next;
-};
+
+//reversing link list is defined in reverse_ll.c
+struct ll *reverse_ll(struct ll *head);
+
+//reversing a link list using iteration is defined in reverse_ll.c
+struct ll *reverse_ll_iter(struct ll *head);
+
+//reversing linklist pair-wise
+void reverse_ll_pair(struct ll *head);
 
 void traverse(struct ll *link)
 {	
@@ -112,15 +117,29 @@ int main()
 {
 	struct ll *head;
 	head = NULL;
-	printf("\nInserting 6 links ");
+	printf("\n1. Inserting 6 links ");
 	head = insert(head, 0);
 	head = insert(head, 1);
 	head = insert(head, 2);
-	head = insert(head, 3);
+	head = insert(head, 3);	
 	head = insert(head, 4);
-	printf("\nTraversing\n");
+	printf("\n2. Traversing\n");
 	traverse(head);
 	delete(head,3);
+	printf("\n3. Reversing linklist by recursion\n");
+	head = reverse_ll(head);
+	printf("\nResult after reversing\n");
+	traverse(head);
+	printf("\n 4. Reversing linklist by iteration\n");
+	head = reverse_ll_iter(head);
+	printf("\nResult after reversing\n");
+	traverse(head);
+
+	printf("5. Reversing linklist pairwise");
+	reverse_ll_pair(head);
+	printf("\nResult after reversing\n");
+	traverse(head);
+
 	return 0;
 
 }
