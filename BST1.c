@@ -183,6 +183,34 @@ void delete( struct node * head, struct node * parent, int i)
     }
 }
 
+//Deleting of subtree from given node
+void delete_sub(struct node *node){
+    //Deleting left child
+    if (node->left!=NULL){
+
+	if(node->left->left != NULL){
+	    delete_sub(node->left);
+	}
+	if (node->left->right != NULL){
+	    delete_sub(node->left);
+	}
+	printf("\n Deleting node %d", node->left->data);
+	free(node->left);
+	node->left = NULL;
+    }
+    //Deleting right child
+    if (node->right!=NULL){
+	if(node->right->left != NULL){
+	    delete_sub(node->right);
+	}
+	if (node->right->right != NULL){
+	    delete_sub(node->right);
+	}   
+	printf("\n Deleting node %d", node->right->data);
+	free(node->right);
+	node->right = NULL;
+    }
+}
 
 //Inorder traversal 
 void in_traverse( struct node *head)
@@ -283,9 +311,14 @@ void main()
     printf("\n3. Least Common ancestor");
     lca(head, 62, 70);
     i = 65;
+    printf("\n\n4. delete left and right subtrees of head\n");
+    delete_sub(head->left);
+    delete_sub(head->right);
+
     //printf("\n2. Deleting %d", i);
     //delete(head,NULL, i); printf("\n");
     // printf("After deletion of %d", i);
+    printf("\n");
     in_traverse(head); printf("\n");
    
 
